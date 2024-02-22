@@ -3,9 +3,14 @@ import { Form, Button, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import "./LoginForm.css";
-import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import app from "./firebase"
+import { Link, useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import app from "./firebase";
 import BackgroundImage from "../assets/images/background.jpg";
 import Logo from "../assets/images/logo.png";
 
@@ -16,9 +21,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   const GoogleSignIn = async (event) => {
-
     const provider = new GoogleAuthProvider();
 
     const auth = getAuth(app);
@@ -31,7 +34,8 @@ const Login = () => {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -41,14 +45,13 @@ const Login = () => {
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-  }
+  };
 
- 
   const signInWithFacebook = async (event) => {
     const provider = new FacebookAuthProvider();
 
     const auth = getAuth(app);
-    
+
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
@@ -83,9 +86,9 @@ const Login = () => {
 
     try {
       const response = await fetch(loginUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
@@ -104,7 +107,7 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
+
   return (
     <div
       className="sign-in__wrapper"
@@ -113,24 +116,37 @@ const Login = () => {
       <div className="sign-in__backdrop"></div>
 
       <Form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
-        <img className="img-thumbnail mx-auto d-block mb-2" src={Logo} alt="logo" />
+        <img
+          className="img-thumbnail mx-auto d-block mb-2"
+          src={Logo}
+          alt="logo"
+          style={{ width: '75px', height: 'auto' }}
+        />
         <div className="h4 mb-2 text-center">Sign In</div>
 
-        <Button variant="outline-primary" className="mb-2 w-100 google-sign-in" onClick={ GoogleSignIn }>
+        <Button
+          variant="outline-primary"
+          className="mb-2 w-100 google-sign-in"
+          onClick={GoogleSignIn}
+        >
           <FontAwesomeIcon icon={faGoogle} className="social-icon" />
           Sign in with Google
         </Button>
 
-        <Button variant="outline-primary" className="mb-2 w-100 facebook-sign-in" onClick={ signInWithFacebook }>
+        <Button
+          variant="outline-primary"
+          className="mb-2 w-100 facebook-sign-in"
+          onClick={signInWithFacebook}
+        >
           <FontAwesomeIcon icon={faFacebook} className="social-icon" />
           Sign in with Facebook
         </Button>
 
-            {/* Divider with 'or' Text */}
+        {/* Divider with 'or' Text */}
         <div className="divider-or">
-            <div className="divider-line"></div>
-            <span>or</span>
-            <div className="divider-line"></div>
+          <div className="divider-line"></div>
+          <span>or</span>
+          <div className="divider-line"></div>
         </div>
 
         {show && (
@@ -179,13 +195,12 @@ const Login = () => {
             Logging In...
           </Button>
         )}
-        
 
         <div className="d-grid justify-content-end">
           <Button
             className="text-muted px-0"
             variant="link"
-            onClick={() => {} /* Add functionality for forgot password */}
+            onClick={() => navigate("/forgot-password")} // Update this line
           >
             Forgot password?
           </Button>
