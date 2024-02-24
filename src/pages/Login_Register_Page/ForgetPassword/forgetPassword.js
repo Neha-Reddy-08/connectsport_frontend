@@ -37,10 +37,10 @@ const ForgotPasswordPage = () => {
     >
       <div className="forget__backdrop"></div>
     <div>
-      {/* {step === 1 && <IdentityVerificationComponent onVerifyIdentity={handleIdentityVerified} />} */}
-      {/* {step === 2 && <SecurityQuestionsComponent questions={userDetails.questions} onVerifyAnswers={handleQuestionsAnswered} />} */}
-      {/* {step === 3 && <OtpVerificationComponent onVerifyOtp={handleOtpVerified} />} */}
-      {step === 1 && <NewPasswordComponent onChangePassword={handlePasswordChanged} />}
+      {step === 1 && <IdentityVerificationComponent onVerifyIdentity={handleIdentityVerified} />}
+      {step === 2 && <SecurityQuestionsComponent questions={userDetails.questions} onVerifyAnswers={handleQuestionsAnswered} />}
+      {step === 3 && <OtpVerificationComponent onVerifyOtp={handleOtpVerified} />}
+      {step === 4 && <NewPasswordComponent onChangePassword={handlePasswordChanged} />}
     </div>
     </div>
   );
