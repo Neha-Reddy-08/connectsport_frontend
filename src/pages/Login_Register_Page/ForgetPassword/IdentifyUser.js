@@ -3,15 +3,23 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../../../Styles/Login_Register_Page/forgetPassword.css";
 import BackgroundImage from "../../../assets/images/background.jpg";
-import Logo from "../../../assets/images/logo.png";
 import ReusableForm from "../../../Components/common/reusableForm";
+import axios from 'axios'; 
 
 const IdentityVerificationComponent = ({ onVerifyIdentity }) => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onVerifyIdentity(email);
+    try {
+      // Call your API to send an email
+      await axios.post('YOUR_API_ENDPOINT', { email }); // Replace 'YOUR_API_ENDPOINT' with your actual endpoint
+      onVerifyIdentity(email);
+      // Here you can set state to show success feedback
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      // Here you can set state to show error feedback
+    }
   };
 
   return (
@@ -33,7 +41,7 @@ const IdentityVerificationComponent = ({ onVerifyIdentity }) => {
 
         <div className="d-flex justify-content-center">
           <Button variant="primary" type="submit" className="w-20">
-            Register
+            Verify
           </Button>
         </div>
       </ReusableForm>

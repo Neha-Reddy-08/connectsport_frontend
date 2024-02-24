@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
-import Logo from "../../assets/images/logo.png"; // Make sure the path is correct
 import BackgroundImage from "../../assets/images/background.jpg";
 import "../../Styles/Login_Register_Page/RegisterForm.css";
 import Footer from "../../Components/common/footer";

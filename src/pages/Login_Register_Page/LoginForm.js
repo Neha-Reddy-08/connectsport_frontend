@@ -14,7 +14,6 @@ import {
 } from "firebase/auth";
 import app from "../../services/firebase";
 import BackgroundImage from "../../assets/images/background.jpg";
-import Logo from "../../assets/images/logo.png";
 
 const Login = () => {
   const [inputUsername, setInputUsername] = useState("");

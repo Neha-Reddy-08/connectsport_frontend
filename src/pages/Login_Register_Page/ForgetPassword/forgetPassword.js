@@ -5,7 +5,6 @@ import OtpVerificationComponent from './OtpVerification';
 import NewPasswordComponent from './NewPassword';
 import "../../../Styles/Login_Register_Page/forgetPassword.css";
 import BackgroundImage from "../../../assets/images/background.jpg";
-import Logo from "../../../assets/images/logo.png";
 
 const ForgotPasswordPage = () => {
   const [step, setStep] = useState(1);

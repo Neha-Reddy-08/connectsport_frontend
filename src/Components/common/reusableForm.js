@@ -1,7 +1,7 @@
 // src/components/ReusableForm.js
 import React from "react";
 import Logo from "../../assets/images/logo.png"; // Adjust the path as necessary
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const ReusableForm = ({ onSubmit, children }) => {
   return (
