@@ -3,6 +3,9 @@ import IdentityVerificationComponent from './IdentifyUser';
 import SecurityQuestionsComponent from './SecurityQuestion';
 import OtpVerificationComponent from './OtpVerification';
 import NewPasswordComponent from './NewPassword';
+import "../../../Styles/Login_Register_Page/forgetPassword.css";
+import BackgroundImage from "../../../assets/images/background.jpg";
+import Logo from "../../../assets/images/logo.png";
 
 const ForgotPasswordPage = () => {
   const [step, setStep] = useState(1);
@@ -28,11 +31,17 @@ const ForgotPasswordPage = () => {
   };
 
   return (
+    <div
+      className="forget__wrapper"
+      style={{ backgroundImage: `url(${BackgroundImage})` }}
+    >
+      <div className="forget__backdrop"></div>
     <div>
-      {step === 1 && <IdentityVerificationComponent onVerifyIdentity={handleIdentityVerified} />}
-      {step === 2 && <SecurityQuestionsComponent questions={userDetails.questions} onVerifyAnswers={handleQuestionsAnswered} />}
-      {step === 3 && <OtpVerificationComponent onVerifyOtp={handleOtpVerified} />}
-      {step === 4 && <NewPasswordComponent onChangePassword={handlePasswordChanged} />}
+      {/* {step === 1 && <IdentityVerificationComponent onVerifyIdentity={handleIdentityVerified} />} */}
+      {/* {step === 2 && <SecurityQuestionsComponent questions={userDetails.questions} onVerifyAnswers={handleQuestionsAnswered} />} */}
+      {/* {step === 3 && <OtpVerificationComponent onVerifyOtp={handleOtpVerified} />} */}
+      {step === 1 && <NewPasswordComponent onChangePassword={handlePasswordChanged} />}
+    </div>
     </div>
   );
 };

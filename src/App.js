@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginForm from './Components/LoginForm';
-import RegisterForm from './Components/RegisterForm';
-import HomePage from './Components/HomePage';
-import ForgotPassword from './Components/forgetPassword';
+import LoginForm from './pages/Login_Register_Page/LoginForm';
+import RegisterForm from './pages/Login_Register_Page/RegisterForm';
+import HomePage from './pages/Home_Page/HomePage';
+import ForgotPassword from './pages/Login_Register_Page/ForgetPassword/forgetPassword';
 // import NotFoundPage from './Components/NotFoundPage'; // Ensure you have this component for handling 404 errors
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';

@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import "./LoginForm.css";
+import "../../Styles/Login_Register_Page/LoginForm.css";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../../Components/common/footer";
+import ReusableForm from "../../Components/common/reusableForm.js";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
-import app from "./firebase";
-import BackgroundImage from "../assets/images/background.jpg";
-import Logo from "../assets/images/logo.png";
+import app from "../../services/firebase";
+import BackgroundImage from "../../assets/images/background.jpg";
+import Logo from "../../assets/images/logo.png";
 
 const Login = () => {
   const [inputUsername, setInputUsername] = useState("");
@@ -115,13 +117,7 @@ const Login = () => {
     >
       <div className="sign-in__backdrop"></div>
 
-      <Form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
-        <img
-          className="img-thumbnail mx-auto d-block mb-2"
-          src={Logo}
-          alt="logo"
-          style={{ width: '75px', height: 'auto' }}
-        />
+      <ReusableForm onSubmit={handleSubmit}>
         <div className="h4 mb-2 text-center">Sign In</div>
 
         <Button
@@ -209,10 +205,8 @@ const Login = () => {
         <div className="text-center registration-prompt">
           Not a member? <Link to="/register">Register</Link>
         </div>
-      </Form>
-      <div className="w-100 mb-2 position-absolute bottom-0 start-50 translate-middle-x text-white text-center">
-        Made by Team 17 | &copy;2024
-      </div>
+      </ReusableForm>
+      <Footer />
     </div>
   );
 };

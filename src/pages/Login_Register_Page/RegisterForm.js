@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
-import Logo from "../assets/images/logo.png"; // Make sure the path is correct
-import BackgroundImage from "../assets/images/background.jpg";
-import "./RegisterForm.css";
+import Logo from "../../assets/images/logo.png"; // Make sure the path is correct
+import BackgroundImage from "../../assets/images/background.jpg";
+import "../../Styles/Login_Register_Page/RegisterForm.css";
+import Footer from "../../Components/common/footer";
+import ReusableForm from "../../Components/common/reusableForm.js";
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ const RegistrationPage = () => {
     "What was the name of your childhood best friend?",
     "In what city did your parents meet?",
     "What was your childhood nickname?",
-    "What is your oldest sibling's middle name?"
+    "What is your oldest sibling's middle name?",
   ];
 
   const handleChange = (e) => {
@@ -93,16 +95,7 @@ const RegistrationPage = () => {
           <Row className="justify-content-md-center">
             <Col md={6}>
               <div className="form-container">
-                <Form
-                  className="shadow p-4 bg-white rounded"
-                  onSubmit={handleSubmit}
-                >
-                  <img
-                    className="img-thumbnail mx-auto d-block mb-2"
-                    src={Logo}
-                    alt="logo"
-                    style={{ width: "75px", height: "auto" }}
-                  />
+                <ReusableForm onSubmit={handleSubmit}>
                   <h2 className="h4 mb-2 text-center">Register</h2>
                   <Form.Group className="mb-3">
                     <Form.Label>First Name</Form.Label>
@@ -264,14 +257,12 @@ const RegistrationPage = () => {
                       <Link to="/login">Login here</Link>
                     </span>
                   </div>
-                </Form>
+                </ReusableForm>
               </div>
             </Col>
           </Row>
         </Container>
-        <div className="w-100 mb-2 position-absolute bottom-0 start-50 translate-middle-x text-white text-center">
-          Made by Team 17 | &copy;2024
-        </div>
+        <Footer />
       </div>
     </div>
   );
