@@ -1,0 +1,94 @@
+.navbar {
+    background-color: #e3f2fd;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    padding: 0rem 0rem; 
+}
+
+.navbar-expand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.2rem; /* Reduced from larger size, adjust as necessary */
+    color: black;
+    text-decoration: none;
+}
+
+.navbar-toggler {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px; /* Reduced padding */
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding-left: 0;
+    align-items: center; /* This helps align items if they have different heights */
+}
+
+.navbar-search {
+    position: relative;
+    display: flex;
+    align-items: center; /* Aligns the search form items vertically */
+}
+
+.navbar-logo {
+    width: 55px; /* Adjust if necessary */
+    height: auto;
+    margin-right: 10px; /* Adds space between logo and brand name */
+}
+
+.navbar-brand-name {
+    font-size: 1.5rem; /* Makes the name larger and more prominent */
+    font-weight: bold; /* Makes the font thicker */
+    color: #007bff; /* Stylish color, change as needed */
+    vertical-align: middle; /* Aligns with the logo vertically */
+}
+
+.search-form {
+    display: flex;
+    border-radius: 20px; /* Adds rounded corners */
+    background-color: #f1f1f1; /* Light grey background */
+    overflow: hidden; /* Ensures the children stay within the rounded border */
+    align-items: center; /* This ensures that the search input and button align nicely */
+}
+
+.search-input {
+    flex-grow: 1; /* Takes up as much space as possible */
+    padding: 6px 10px; /* Reduced padding */
+    border: none; /* Removes the border */
+    background-color: transparent; /* Matches the search bar background */
+    outline: none; /* Removes the outline */
+    color: #333; /* Dark text color for contrast */
+}
+
+.search-button {
+    padding: 6px 10px; /* Reduced padding */
+    background-color: #007bff; /* Or any color you prefer */
+    color: white;
+    border: none; /* Removes the border */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+.search-button i {
+    margin: 0; /* Adjusts the margin of the icon if necessary */
+}
+
+.logout-button {
+    padding: 5px 15px;
+    margin-left: 20px; /* Adjust as needed */
+    background-color: #f00; /* Change as needed */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
