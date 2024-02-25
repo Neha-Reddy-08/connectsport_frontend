@@ -98,6 +98,8 @@ const Login = () => {
 
       if (response.ok) {
         localStorage.setItem("token", data.token); // Store JWT token
+        localStorage.setItem("userName", JSON.stringify({ name: data.userId })); // Store the username
+        // console.log('Stored userID:', JSON.parse(localStorage.getItem('userName')).name);
         navigate(`/home/${data.userId}`);
       } else {
         setShow(true); // Show error alert

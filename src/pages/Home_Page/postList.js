@@ -2,11 +2,11 @@
 import React from 'react';
 import Post from './post';
 
-function PostList({ posts }) {
+function PostList({ posts, currentUser  }) {
   return (
     <div>
       {posts.map((post) => (
-        <Post key={post.id} {...post} />
+        <Post key={post.id} {...post} currentUser={currentUser} />
       ))}
     </div>
   );
