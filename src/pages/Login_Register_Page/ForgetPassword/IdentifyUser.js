@@ -13,7 +13,7 @@ const IdentityVerificationComponent = ({ onVerifyIdentity }) => {
     event.preventDefault();
     try {
       // Call your API to send an email
-      await axios.post('YOUR_API_ENDPOINT', { email }); // Replace 'YOUR_API_ENDPOINT' with your actual endpoint
+      await axios.post('YOUR_API_ENDPOINT', { email }); // Replace 'YOUR_API_ENDPOINT' with your actual endpoint 
       onVerifyIdentity(email);
       // Here you can set state to show success feedback
     } catch (error) {

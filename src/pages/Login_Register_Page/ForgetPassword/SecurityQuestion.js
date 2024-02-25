@@ -7,7 +7,7 @@ const SecurityQuestionsComponent = ({ userId, onVerificationSuccess }) => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [error, setError] = useState("");
-
+  
   // Fetch questions from backend
   useEffect(() => {
     const fetchQuestions = async () => {

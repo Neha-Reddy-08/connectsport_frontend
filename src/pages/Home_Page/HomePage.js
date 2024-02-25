@@ -1,45 +1,48 @@
-import React from 'react';
+// src/HomePage.js
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from '../../Components/common/navbar'; // Ensure this path is correct and follow PascalCase for component files
-import PostList from './postList'; // Ensure this path is correct and follow PascalCase for component files
+import Navbar from '../../Components/common/navbar'; // Adjust path as necessary
+import PostList from './postList'; // Adjust path as necessary
+import PostForm from './postForm'; // Adjust path as necessary
 
 function HomePage() {
   const location = useLocation();
   const navigate = useNavigate();
   const user = location.state?.user;
-  const isLoggedIn = !!localStorage.getItem('token'); // Convert token presence to a boolean
+  const isLoggedIn = !!localStorage.getItem('token');
 
-  const posts = [
+  const [posts, setPosts] = useState([
     { id: 1, author: 'John Doe', content: 'This is the first post' },
     { id: 2, author: 'Jane Doe', content: 'This is the second post' },
-  ];
+  ]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
-  // Sample posts data
 
+  const addNewPost = (content) => {
+    const newPost = {
+      id: posts.length + 1, // Simple ID assignment
+      author: user?.firstName || 'Anonymous', // Use user name or a placeholder
+      content,
+    };
+    setPosts([newPost, ...posts]);
+  };
 
   return (
     <div className='container-fluid'>
       <Navbar user={user} isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-
       <div className='row'>
-        {/* It's good practice to comment sections even if they're empty to maintain structure and readability */}
         <div className='col-md-3'>
-          {/* Left sidebar content can be added here */}
+          {/* Left sidebar content */}
         </div>
-
         <div className='col-md-6'>
-          <h1>Welcome, {user?.firstName || 'Guest'}!</h1>
-          {/* Fallback to 'Guest' if user.firstName is undefined */}
-          <p>This is your user account page.</p>
+          <PostForm onPostSubmit={addNewPost} />
           <PostList posts={posts} />
         </div>
-
         <div className='col-md-3'>
-          {/* Right sidebar content can be added here */}
+          {/* Right sidebar content */}
         </div>
       </div>
     </div>
