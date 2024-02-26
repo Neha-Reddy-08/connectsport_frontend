@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
-import IdentityVerificationComponent from './IdentifyUser';
-import SecurityQuestionsComponent from './SecurityQuestion';
-import OtpVerificationComponent from './OtpVerification';
-import NewPasswordComponent from './NewPassword';
+import React, { useState } from "react";
+import IdentityVerificationComponent from "./IdentifyUser";
+import SecurityQuestionsComponent from "./SecurityQuestion";
+import OtpVerificationComponent from "./OtpVerification";
+import NewPasswordComponent from "./NewPassword";
 import "../../../Styles/Login_Register_Page/forgetPassword.css";
 import BackgroundImage from "../../../assets/images/background.jpg";
 
 const ForgotPasswordPage = () => {
   const [step, setStep] = useState(1);
-  const [userDetails, setUserDetails] = useState({ email: '', questions: [] }); // Add more details as required
+  // Extended userDetails to include token and answers for seamless data flow between components
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    token: "",
+    questions: [],
+    answers: [],
+  });
 
   const handleIdentityVerified = (details) => {
-    setUserDetails(details); // Details should include email and security questions
+    // Assuming details include { email, token }
+    console.log("Identity verified, token received:", details.token);
+    setUserDetails((prevDetails) => ({ ...prevDetails, ...details }));
     setStep(2); // Move to security questions
   };
 
   const handleQuestionsAnswered = (answers) => {
-    // Validate answers then:
-    setStep(3); // Move to OTP verification
+    // Assuming answers is an array or object of answers
+    console.log("Questions answered, moving to OTP verification");
+    setUserDetails((prevDetails) => ({ ...prevDetails, answers }));
+    setStep(3); // This should change the step to 3, causing the page to update
   };
 
   const handleOtpVerified = () => {
@@ -26,7 +36,9 @@ const ForgotPasswordPage = () => {
 
   const handlePasswordChanged = () => {
     // Password has been successfully changed
-    // Redirect to login page or show success message
+    // Here you can redirect to the login page or show a success message
+    // For example: navigate('/login');
+    console.log("Password changed successfully!");
   };
 
   return (
@@ -35,12 +47,32 @@ const ForgotPasswordPage = () => {
       style={{ backgroundImage: `url(${BackgroundImage})` }}
     >
       <div className="forget__backdrop"></div>
-    <div>
-      {step === 1 && <IdentityVerificationComponent onVerifyIdentity={handleIdentityVerified} />}
-      {step === 2 && <SecurityQuestionsComponent questions={userDetails.questions} onVerifyAnswers={handleQuestionsAnswered} />}
-      {step === 3 && <OtpVerificationComponent onVerifyOtp={handleOtpVerified} />}
-      {step === 4 && <NewPasswordComponent onChangePassword={handlePasswordChanged} />}
-    </div>
+      <div>
+        {step === 1 && (
+          <IdentityVerificationComponent
+            onVerifyIdentity={handleIdentityVerified}
+          />
+        )}
+        {step === 2 && (
+          <SecurityQuestionsComponent
+            token={userDetails.token}
+            onVerifyAnswers={handleQuestionsAnswered}
+          />
+        )}
+
+        {step === 3 && (
+          <OtpVerificationComponent
+            token={userDetails.token}
+            onVerifyOtp={handleOtpVerified}
+          />
+        )}
+        {step === 4 && (
+          <NewPasswordComponent
+            token={userDetails.token}
+            onChangePassword={handlePasswordChanged}
+          />
+        )}
+      </div>
     </div>
   );
 };

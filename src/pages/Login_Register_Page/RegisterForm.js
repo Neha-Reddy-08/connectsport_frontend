@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import BackgroundImage from "../../assets/images/background.jpg";
 import "../../Styles/Login_Register_Page/RegisterForm.css";
@@ -7,6 +7,8 @@ import Footer from "../../Components/common/footer";
 import ReusableForm from "../../Components/common/reusableForm.js";
 
 const RegistrationPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -73,6 +75,7 @@ const RegistrationPage = () => {
 
       if (response.ok) {
         console.log("User registered successfully");
+        navigate('/login'); // Redirect to login page
         // Handle successful registration (e.g., clear form, show message, redirect)
       } else {
         console.error("Registration failed");
