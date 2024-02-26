@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import SocialButtons from '../../Components/common/socialButtons'; // Ensure the path is correct
 
-function Post({ author, content, imageUrl, currentUser }) {
+function Post({ id, author, content, imageUrl, currentUser, deletePost }) {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [showComments, setShowComments] = useState(false);
+  const [showOptions, setShowOptions] = useState(false); // For showing the delete option
 
   // Handles the increment of likes
   const handleLike = () => setLikes(likes + 1);
@@ -15,7 +16,7 @@ function Post({ author, content, imageUrl, currentUser }) {
     if (!commentText.trim()) return;
     const newComment = {
       text: commentText,
-      commenter: currentUser || 'Anonymous', // Default to 'Anonymous' if currentUser is not defined
+      commenter: currentUser || 'Anonymous',
     };
     setComments([...comments, newComment]);
     setCommentText('');
@@ -23,7 +24,15 @@ function Post({ author, content, imageUrl, currentUser }) {
 
   return (
     <div style={postStyle}>
-      <h4>{author}</h4>
+      <div className="post-header">
+        <h4>{author}</h4>
+        <button onClick={() => setShowOptions(!showOptions)} style={optionButtonStyle}>...</button>
+        {showOptions && (
+          <div className="post-options" style={optionsStyle}>
+            <button onClick={() => deletePost(id)} style={deleteButtonStyle}>Delete</button>
+          </div>
+        )}
+      </div>
       {imageUrl && <img src={imageUrl} alt="Post" style={imageStyle} />}
       <p>{content}</p>
       <SocialButtons 
@@ -88,4 +97,29 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
+const optionButtonStyle = {
+  // Style for your option button
+  cursor: 'pointer',
+  float: 'right', // Position the button to the right
+  border: 'none',
+  background: 'none',
+};
+
+const optionsStyle = {
+  // Style for the options dropdown
+  position: 'absolute',
+  right: '10px',
+  backgroundColor: '#f9f9f9',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  padding: '5px',
+};
+
+const deleteButtonStyle = {
+  // Style for your delete button within the dropdown
+  background: 'none',
+  border: 'none',
+  color: 'red',
+  cursor: 'pointer',
+};
 export default Post;

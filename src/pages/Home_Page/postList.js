@@ -1,14 +1,20 @@
-// src/components/PostList.js
 import React from 'react';
-import Post from './post';
+import Post from './post'; // Ensure correct import path
+import PollDisplay from './pollDisplay'; // Ensure correct import path
 
-
-function PostList({ posts, currentUser  }) {
+// Enhanced PostList component to handle both regular posts and polls
+function PostList({ posts, currentUser, onVote }) {
   return (
     <div>
-      {posts.map((post) => (
-        <Post key={post.id} {...post} currentUser={currentUser} />
-      ))}
+      {posts.map((post) =>
+        post.type === 'poll' ? (
+          // Render PollDisplay for poll-type posts
+          <PollDisplay key={post.id} poll={post} onVote={onVote} />
+        ) : (
+          // Render Post for regular posts
+          <Post key={post.id} {...post} currentUser={currentUser} />
+        )
+      )}
     </div>
   );
 }
