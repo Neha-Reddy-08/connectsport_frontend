@@ -2,6 +2,7 @@
 import React from 'react';
 import Post from './post';
 
+
 function PostList({ posts, currentUser  }) {
   return (
     <div>

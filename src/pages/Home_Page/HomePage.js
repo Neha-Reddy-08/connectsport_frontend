@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../../Components/common/navbar'; // Ensure correct import path
 import PostList from './postList'; // Ensure correct import path
 import PostForm from './postForm'; // Ensure correct import path
+import SocialButtons from '../../Components/common/socialButtons';
 
 function HomePage() {
   const location = useLocation();
@@ -42,27 +43,56 @@ function HomePage() {
     navigate('/login');
   };
 
-  // Function to add a new post
-  const addNewPost = async (content) => {
-    try {
-      const response = await fetch('http://your-backend-domain.com/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Adjust according to your auth method
-        },
-        body: JSON.stringify({ author: currentUser || 'Anonymous', content }),
+//   // Function to add a new post
+//   const addNewPost = async (content) => {
+//     try {
+//       const response = await fetch('http://localhost:3000/posts', { // Ensure this matches your backend API domain
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure this matches your authentication method
+//         },
+//         body: JSON.stringify({ author: currentUser || 'Anonymous', content }),
+//       });
+//       if (response.ok) {
+//         const newPost = await response.json();
+//         setPosts(prevPosts => [newPost, ...prevPosts]);
+//       } else {
+//         throw new Error('Failed to create post');
+//       }
+//     } catch (error) {
+//       console.error(error.message);
+//     }
+// };
+
+const addNewPost = async (content, imageFile) => {
+  const formData = new FormData();
+  formData.append('content', content);
+  formData.append('author', currentUser || 'Anonymous'); // Ensure this is correctly set based on your state
+  if (imageFile) {
+      formData.append('image', imageFile); // Only add if image is selected
+  }
+
+  try {
+      const response = await fetch('http://localhost:3000/posts', {
+          method: 'POST',
+          headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure this is correct
+              // Do not set 'Content-Type' here, let the browser set it
+          },
+          body: formData,
       });
       if (response.ok) {
-        const newPost = await response.json(); // Assuming backend returns the created post
-        setPosts(prevPosts => [newPost, ...prevPosts]);
+          const newPost = await response.json();
+          setPosts(prevPosts => [newPost, ...prevPosts]);
       } else {
-        throw new Error('Failed to create post');
+          throw new Error('Failed to create post');
       }
-    } catch (error) {
+  } catch (error) {
       console.error(error.message);
-    }
-  };
+  }
+};
+
 
   return (
     <div className='container-fluid'>
