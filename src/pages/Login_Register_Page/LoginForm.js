@@ -24,29 +24,59 @@ const Login = () => {
 
   const GoogleSignIn = async (event) => {
     const provider = new GoogleAuthProvider();
-
     const auth = getAuth(app);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+  
+    try {
+      const result = await signInWithPopup(auth, provider);
+  
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      const backendUrl = process.env.REACT_APP_API_URL + '/auth/google';
+  
+      // This object contains the user information you might want to store in MongoDB
+      const userData = {
+        email: user.email,
+        name: user.displayName,
+        providerId: user.providerData[0].providerId,
+        // Add other details you might need
+      };
+  
+      const response = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       });
-  };
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        localStorage.setItem('token', data.token); // Store JWT token
+        navigate(`/home`); // Redirect to the homepage or user's profile
+      } else {
+        // Handle any errors, such as user already exists
+        setShow(true);
+      }
+    } catch (error) {
+      // Handle Errors here.
+      console.error('Error during Google sign in', error);
+      setShow(true);
+  
+      // The email of the user's account used, if available.
+      const email = error.customData?.email;
+      // The AuthCredential type that was used, if available.
+      const credential = error.code !== 'auth/cancelled-popup-request' ? 
+                         GoogleAuthProvider.credentialFromError(error) : 
+                         null;
+      // Log additional information, if needed.
+      console.error(`Error code: ${error.code}, Message: ${error.message}`);
+    }
+  };  
 
   const signInWithFacebook = async (event) => {
     const provider = new FacebookAuthProvider();
