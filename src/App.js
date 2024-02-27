@@ -4,9 +4,10 @@ import LoginForm from './pages/Login_Register_Page/LoginForm';
 import RegisterForm from './pages/Login_Register_Page/RegisterForm';
 import HomePage from './pages/Home_Page/HomePage';
 import ForgotPassword from './pages/Login_Register_Page/ForgetPassword/forgetPassword';
-// import NotFoundPage from './Components/NotFoundPage'; // Ensure you have this component for handling 404 errors
+// import NotFoundPage from './Components/NotFoundPage'; // Ensure this component exists for handling 404 errors
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
+import SettingsPage from './pages/Settings/settings';
 
 // A functional ProtectedRoute component
 const ProtectedRoute = ({ children }) => {
@@ -30,7 +31,15 @@ export default function App() {
           } 
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        {/* <Route path="*" element={<NotFoundPage />} /> Handle unmatched routes */}
+        <Route 
+          path="/settings" 
+          element={
+            <ProtectedRoute>
+              <SettingsPage />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route path="*" element={<NotFoundPage />} /> Uncomment and ensure this component for handling unmatched routes */}
       </Routes>
     </Router>
   );

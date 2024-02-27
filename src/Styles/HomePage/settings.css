@@ -1,0 +1,60 @@
+.settings-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Padding around the form */
+    max-width: 800px; /* Set a max-width for the form container and center it */
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+
+    animation: showSignInForm 0.5s ease-out forwards;
+}
+
+      .settings__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      }
+
+      @keyframes showSignInForm {
+        0%,
+        30% {
+          transform: translate(0, -150%);
+        }
+        70%,
+        90% {
+          transform: translate(0, 1rem);
+        }
+        80%,
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      
+      .image-preview-container {
+        margin-bottom: 20px; /* Adjust based on your layout */
+      }
+      
+      .image-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #e1e1e1;
+        display: inline-block; /* Center the preview in the container */
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 100px; /* Center the text vertically if no image */
+        overflow: hidden; /* Ensure the image stays within the circle */
+      }
+      
+      .image-preview img {
+        width: 100%;
+        height: auto;
+      }

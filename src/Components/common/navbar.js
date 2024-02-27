@@ -33,9 +33,11 @@ const Navbar = ({ user, isLoggedIn, onLogout }) => {
       <div className='navbar-expand'>
         <div className='navbar-nav'>
           <NavItem link='/' active>Home</NavItem>
-          <NavItem link='/features'>Features</NavItem>
-          <NavItem link='/pricing'>Pricing</NavItem>
-          <NavItem link='#' disabled>Disabled</NavItem> {/* Keep '#' if no path is intended */}
+          <NavItem link='/messages'>Messages</NavItem>
+          <NavItem link='/friends'>Friends</NavItem>
+          <NavItem link='/groups'>Groups</NavItem>
+          <NavItem link='/pages'>Pages</NavItem>
+          <NavItem link='/settings'>Settings</NavItem>
         </div>
       </div>
 
