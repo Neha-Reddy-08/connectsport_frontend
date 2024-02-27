@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/common/navbar"; // Ensure correct import path
 import PostList from "./postList"; // Ensure correct import path
 import PostForm from "./postForm"; // Ensure correct import path
-import PollDisplay from "./pollDisplay"; // Ensure correct import path
-import Post from "./post";
 
 function HomePage() {
   const navigate = useNavigate();

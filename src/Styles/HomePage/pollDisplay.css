@@ -1,0 +1,40 @@
+/* PollDisplay.css */
+.poll-container {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .poll-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .poll-option {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .poll-option:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .poll-results {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .vote-percentage {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  

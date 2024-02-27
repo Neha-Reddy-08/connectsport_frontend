@@ -31,6 +31,7 @@ const ForgotPasswordPage = () => {
   };
 
   const handleOtpVerified = () => {
+    console.log("OTP Verified, moving to step 4")
     setStep(4); // Move to new password
   };
 

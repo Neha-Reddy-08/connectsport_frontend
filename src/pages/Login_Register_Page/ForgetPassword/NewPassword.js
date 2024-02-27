@@ -3,7 +3,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 import axios from 'axios'; // Ensure axios is installed for HTTP requests
 import ReusableForm from "../../../Components/common/reusableForm";
 
-const NewPasswordComponent = ({ onChangePassword }) => {
+const NewPasswordComponent = ({ token, onChangePassword }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(""); // State for backend error messages
@@ -12,15 +12,25 @@ const NewPasswordComponent = ({ onChangePassword }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords don't match."); // Consider using a state-driven message instead of alert for consistency
+      setError("Passwords don't match."); // Using state-driven message for consistency
+      return;
+    }
+
+    // Check if the token exists
+    if (!token) {
+      setError("Invalid or expired token.");
       return;
     }
     
     try {
-      const response = await axios.post('/api/change-password', { newPassword: password });
-      if (response.data.success) {
-        onChangePassword(password); // You can use this if you need to do something with the password
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/change-password`, { 
+        newPassword: password,
+        token: token // Include the token here
+      });
+      if (response.data.message === "Password changed successfully") { // Adjust according to your API response
+        onChangePassword(); // If you need to do something with the password, pass it as an argument
         setIsPasswordChanged(true); // Update state to indicate password change was successful
+        setError(""); // Clear any previous errors
       } else {
         setError('Failed to change password. Please try again.');
       }
