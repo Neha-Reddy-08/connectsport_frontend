@@ -57,7 +57,7 @@ const Login = () => {
   
       if (response.ok) {
         localStorage.setItem('token', data.token); // Store JWT token
-        navigate(`/home`); // Redirect to the homepage or user's profile
+        navigate(`/home/${user.email}`); // Redirect to the homepage or user's profile
       } else {
         // Handle any errors, such as user already exists
         setShow(true);
@@ -87,6 +87,7 @@ const Login = () => {
       .then((result) => {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         const user = result.user;
+        navigate(`/home/${user.email}`);
         // Access token if needed: const token = FacebookAuthProvider.credentialFromResult(result).accessToken;
         // Perform actions with the user's info here
         console.log("Facebook sign in success", user);
