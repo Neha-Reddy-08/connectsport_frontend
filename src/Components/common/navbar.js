@@ -4,16 +4,13 @@ import NavItem from "./navItem"; // Ensure the file name matches with case sensi
 import Logo from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-// Removed direct import of SearchComponent since it's no longer used here
 
-const Navbar = ({ user, isLoggedIn, onLogout, onSearchChange }) => { // Assuming you might pass onSearchChange later
+const Navbar = ({ user, isLoggedIn, onLogout, onSearchChange }) => {
   const [searchInput, setSearchInput] = useState("");
 
-  // Handle the search input changes
   const handleSearchChange = (e) => {
     const newValue = e.target.value;
     setSearchInput(newValue);
-    // Call onSearchChange if it's provided
     if (onSearchChange) {
       onSearchChange(newValue);
     }
@@ -31,7 +28,6 @@ const Navbar = ({ user, isLoggedIn, onLogout, onSearchChange }) => { // Assuming
         </button>
       </div>
 
-      {/* Interactive search input */}
       <div className="navbar-search">
         <input
           type="text"
@@ -40,22 +36,22 @@ const Navbar = ({ user, isLoggedIn, onLogout, onSearchChange }) => { // Assuming
           placeholder="Search..."
           className="search-input"
         />
-        <FontAwesomeIcon icon={faSearch} />
+        <button className="search-button">
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
       </div>
 
-      {/* Navigation items */}
       <div className="navbar-expand">
-        <div className="navbar-nav">
+        <ul className="navbar-nav">
           {isLoggedIn && <NavItem link="/" active>Home</NavItem>}
           {isLoggedIn && <NavItem link="/messages">Messages</NavItem>}
           {isLoggedIn && <NavItem link="/friends">Friends</NavItem>}
           {isLoggedIn && <NavItem link="/groups">Groups</NavItem>}
           {isLoggedIn && <NavItem link="/pages">Pages</NavItem>}
           {isLoggedIn && <NavItem link="/settings">Settings</NavItem>}
-        </div>
+        </ul>
       </div>
 
-      {/* Logout button if user is logged in */}
       {isLoggedIn && (
         <div className="navbar-extra">
           <button onClick={onLogout} className="logout-button">

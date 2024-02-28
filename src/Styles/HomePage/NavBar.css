@@ -1,94 +1,105 @@
 .navbar {
     background-color: #e3f2fd;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
-    padding: 0rem 0rem; 
-}
-
-.navbar-expand {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem; /* More breathing space */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.navbar-header {
+    display: flex;
+    align-items: center;
+}
+
 .navbar-brand {
-    font-size: 1.2rem; /* Reduced from larger size, adjust as necessary */
-    color: black;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
 }
 
+.navbar-logo {
+    width: 40px; /* Smaller logo for modern look */
+    height: auto;
+    margin-right: 1rem;
+}
+
+.navbar-brand-name {
+    color: #333; /* Subtle color */
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .navbar-toggler {
-    background-color: transparent;
+    display: none; /* Hide toggler for simplicity, show in mobile view if needed */
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-input {
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 20px; /* Rounded borders for the input */
+    padding: 0.5rem 1rem;
+    width: 250px; /* Fixed width */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Highlight on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Subtle glow */
+}
+
+.search-button {
+    position: absolute;
+    right: 5px;
     border: none;
+    background: none;
     cursor: pointer;
-    padding: 4px 8px; /* Reduced padding */
+    color: #333; /* Matching icon color */
 }
 
 .navbar-nav {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding-left: 0;
-    align-items: center; /* This helps align items if they have different heights */
+    align-items: center;
+    padding: 0;
+    margin-left: 1rem;
 }
 
-.navbar-search {
+.navbar-nav a {
+    color: #333;
+    margin: 0 1rem;
+    text-decoration: none;
+    padding: 0.5rem 0;
     position: relative;
+}
+
+.navbar-nav a:hover,
+.navbar-nav a.active {
+    color: #007bff; /* Interactive link color */
+}
+
+.navbar-expand {
     display: flex;
-    align-items: center; /* Aligns the search form items vertically */
-}
-
-.navbar-logo {
-    width: 55px; /* Adjust if necessary */
-    height: auto;
-    margin-right: 10px; /* Adds space between logo and brand name */
-}
-
-.navbar-brand-name {
-    font-size: 1.5rem; /* Makes the name larger and more prominent */
-    font-weight: bold; /* Makes the font thicker */
-    color: #007bff; /* Stylish color, change as needed */
-    vertical-align: middle; /* Aligns with the logo vertically */
-}
-
-.search-form {
-    display: flex;
-    border-radius: 20px; /* Adds rounded corners */
-    background-color: #f1f1f1; /* Light grey background */
-    overflow: hidden; /* Ensures the children stay within the rounded border */
-    align-items: center; /* This ensures that the search input and button align nicely */
-}
-
-.search-input {
-    flex-grow: 1; /* Takes up as much space as possible */
-    padding: 6px 10px; /* Reduced padding */
-    border: none; /* Removes the border */
-    background-color: transparent; /* Matches the search bar background */
-    outline: none; /* Removes the outline */
-    color: #333; /* Dark text color for contrast */
-}
-
-.search-button {
-    padding: 6px 10px; /* Reduced padding */
-    background-color: #007bff; /* Or any color you prefer */
-    color: white;
-    border: none; /* Removes the border */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
-
-.search-button:hover {
-    background-color: #0056b3; /* Darker shade for hover effect */
-}
-
-.search-button i {
-    margin: 0; /* Adjusts the margin of the icon if necessary */
+    align-items: center;
 }
 
 .logout-button {
-    padding: 5px 15px;
-    margin-left: 20px; /* Adjust as needed */
-    background-color: #f00; /* Change as needed */
+    background-color: #dc3545; /* Bootstrap danger color for logout */
     color: white;
     border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px; /* Rounded borders for the button */
     cursor: pointer;
-  }
+    transition: background-color 0.2s; /* Smooth background color transition */
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Darker shade on hover */
+}
+
+
