@@ -3,10 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/common/navbar"; // Ensure correct import path
 import PostList from "./postList"; // Ensure correct import path
 import PostForm from "./postForm"; // Ensure correct import path
+import SearchComponent from "../../Components/common/searchComponent"; 
 
 function HomePage() {
   const navigate = useNavigate();
-
+  const [searchInput, setSearchInput] = useState(""); // Add this line
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("userName"))?.name
   );
@@ -129,26 +130,19 @@ function HomePage() {
         user={currentUser}
         isLoggedIn={isLoggedIn}
         onLogout={handleLogout}
+        onSearchChange={setSearchInput} // Pass setSearchInput as a prop
       />
+      {searchInput && <SearchComponent />} 
       <div className="row">
         <div className="col-md-3">
-          {/* Placeholder for left sidebar content */}
+          {/* Left sidebar content */}
         </div>
         <div className="col-md-6">
-          <PostForm
-            onPostSubmit={addNewPost} // Corrected from handlePostSubmit to addNewPost
-            onPollSubmit={addNewPoll} // Ensure addNewPoll is correctly implemented
-          />
-          <PostList
-            posts={posts}
-            currentUser={currentUser}
-            onDeletePost={deletePost}
-            onVote={handleVote}
-          />
-          {/* Removed direct rendering of posts */}
+          <PostForm onPostSubmit={addNewPost} onPollSubmit={addNewPoll} />
+          <PostList posts={posts} currentUser={currentUser} onDeletePost={deletePost} onVote={handleVote} />
         </div>
         <div className="col-md-3">
-          {/* Placeholder for right sidebar content */}
+          {/* Right sidebar content */}
         </div>
       </div>
     </div>

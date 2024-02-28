@@ -5,7 +5,7 @@ const SearchComponent = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filters = ['All', 'Posts', 'People', 'Photos', 'Videos', 'Pages', 'Places', 'Groups', 'Apps', 'Events', 'Links'];
+  const filters = ['All', 'Posts', 'People', 'Photos', 'Videos', 'Pages', 'Groups'];
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -18,13 +18,6 @@ const SearchComponent = () => {
 
   return (
     <div className="search-container">
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={handleSearchChange}
-        placeholder="Search..."
-        className="search-input"
-      />
       <div className="filter-options">
         {filters.map((filter) => (
           <button

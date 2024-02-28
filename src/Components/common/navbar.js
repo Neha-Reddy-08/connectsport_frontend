@@ -1,16 +1,26 @@
-import React from "react";
-import "../../Styles/HomePage/NavBar.css"; // Ensure this path is correct
-import NavItem from "./navItem"; // Adjust the import if necessary
+import React, { useState } from "react";
+import "../../Styles/HomePage/NavBar.css";
+import NavItem from "./navItem"; // Ensure the file name matches with case sensitivity
+import Logo from "../../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons"; // Import the search icon
-import Logo from "../../assets/images/logo.png"; // Ensure this path is correct
-import SearchComponent from "../../Components/common/searchComponent"; // Ensure this path is correct
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// Removed direct import of SearchComponent since it's no longer used here
 
-// Functional component for Navbar with destructured props
-const Navbar = ({ user, isLoggedIn, onLogout }) => {
+const Navbar = ({ user, isLoggedIn, onLogout, onSearchChange }) => { // Assuming you might pass onSearchChange later
+  const [searchInput, setSearchInput] = useState("");
+
+  // Handle the search input changes
+  const handleSearchChange = (e) => {
+    const newValue = e.target.value;
+    setSearchInput(newValue);
+    // Call onSearchChange if it's provided
+    if (onSearchChange) {
+      onSearchChange(newValue);
+    }
+  };
+
   return (
     <nav className="navbar">
-      {/* Company logo */}
       <div className="navbar-header">
         <a href="/" className="navbar-brand">
           <img src={Logo} alt="Company Logo" className="navbar-logo" />
@@ -21,19 +31,22 @@ const Navbar = ({ user, isLoggedIn, onLogout }) => {
         </button>
       </div>
 
-      {/* Replace the static search form with the SearchComponent */}
+      {/* Interactive search input */}
       <div className="navbar-search">
-        <SearchComponent />
+        <input
+          type="text"
+          value={searchInput}
+          onChange={handleSearchChange}
+          placeholder="Search..."
+          className="search-input"
+        />
+        <FontAwesomeIcon icon={faSearch} />
       </div>
 
       {/* Navigation items */}
       <div className="navbar-expand">
         <div className="navbar-nav">
-          {isLoggedIn && (
-            <NavItem link="/" active>
-              Home
-            </NavItem>
-          )}
+          {isLoggedIn && <NavItem link="/" active>Home</NavItem>}
           {isLoggedIn && <NavItem link="/messages">Messages</NavItem>}
           {isLoggedIn && <NavItem link="/friends">Friends</NavItem>}
           {isLoggedIn && <NavItem link="/groups">Groups</NavItem>}
