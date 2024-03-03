@@ -80,29 +80,50 @@ const Login = () => {
 
   const signInWithFacebook = async (event) => {
     const provider = new FacebookAuthProvider();
-
     const auth = getAuth(app);
-
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const user = result.user;
-        navigate(`/home/${user.email}`);
-        // Access token if needed: const token = FacebookAuthProvider.credentialFromResult(result).accessToken;
-        // Perform actions with the user's info here
-        console.log("Facebook sign in success", user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = FacebookAuthProvider.credentialFromError(error);
-        console.error("Error during Facebook sign in", errorCode, errorMessage);
+  
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken; // If you need the token for something
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result), if needed
+  
+      const backendUrl = process.env.REACT_APP_API_URL + '/auth/facebook';
+  
+      // This object contains the user information you might want to store in MongoDB
+      const userData = {
+        email: user.email,
+        name: user.displayName,
+        providerId: user.providerData[0].providerId,
+        // Add other details you might need
+      };
+  
+      const response = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       });
-  };
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        localStorage.setItem('token', data.token); // Store JWT token
+        navigate(`/home/${user.email}`); // Redirect to the homepage or user's profile
+      } else {
+        // Handle any errors, such as user already exists
+        setShow(true);
+      }
+    } catch (error) {
+      // Handle Errors here.
+      console.error('Error during Facebook sign in', error);
+      setShow(true); // Show error alert if needed
+    }
+  };  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
