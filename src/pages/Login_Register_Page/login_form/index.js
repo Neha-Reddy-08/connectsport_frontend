@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import "../../Styles/Login_Register_Page/LoginForm.css";
+import "../../../Styles/Login_Register_Page/LoginForm.css";
 import { Link, useNavigate } from "react-router-dom";
-import Footer from "../../Components/common/footer";
-import ReusableForm from "../../Components/common/reusableForm.js";
+import Footer from "../../../Components/layout/footer.js";
+import ReusableForm from "../../../Components/ui/reusableForm.js";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
-import app from "../../services/firebase";
-import BackgroundImage from "../../assets/images/background.jpg";
+import app from "../../../services/firebase.js";
+import BackgroundImage from "../../../assets/images/background.jpg";
 
 const Login = () => {
   const [inputUsername, setInputUsername] = useState("");
